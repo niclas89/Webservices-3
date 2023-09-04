@@ -1,0 +1,74 @@
+2023-08-10 15:47:36,562 * INFO * com.larsson.sushi.controller.CustomerController * getSushis * Customer checking menu
+2023-08-10 15:52:31,784 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-08-08
+2023-08-10 15:54:23,442 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 10:14:01,886 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 10:16:26,991 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 10:16:40,396 * INFO * com.larsson.sushi.controller.CustomerController * getSushis * Customer checking menu
+2023-08-11 10:18:11,988 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 10:20:34,883 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 10:22:53,077 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 10:26:12,195 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 10:30:12,611 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 10:36:47,019 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 10:41:20,243 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:16:29,200 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:16:48,375 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:17:06,610 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:17:08,345 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:17:48,014 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:17:50,478 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:18:20,744 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:23:26,569 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:23:52,237 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:24:43,884 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:33:14,982 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:33:53,877 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:34:34,699 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:35:07,349 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:35:41,912 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 14:37:19,511 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:2  to an unavailable date:2023-08-04
+2023-08-11 16:12:40,245 * INFO * com.larsson.sushi.controller.CustomerController * getSushis * Customer checking menu
+2023-08-14 12:20:45,271 * INFO * com.larsson.sushi.controller.CustomerController * getSushis * Customer checking menu
+2023-08-14 12:21:37,353 * INFO * com.larsson.sushi.controller.CustomerController * getSushis * Customer checking menu
+2023-08-16 12:19:38,464 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 12:20:14,725 * INFO * com.larsson.sushi.controller.CustomerController * getSushis * Customer checking menu
+2023-08-16 12:28:49,901 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 12:29:50,202 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 12:33:32,403 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 12:37:16,562 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 12:38:59,197 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 12:40:33,453 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 12:40:33,609 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-08-16
+2023-08-16 12:47:19,417 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 12:47:19,580 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-08-20
+2023-08-16 12:51:31,304 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 12:51:31,464 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-08-24
+2023-08-16 13:18:11,507 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 13:18:11,665 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-08-30
+2023-08-16 13:32:01,758 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 13:32:01,898 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-08-31
+2023-08-16 13:35:18,713 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 13:35:18,856 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-09-14
+2023-08-16 13:37:26,459 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 13:37:26,595 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-09-15
+2023-08-16 13:39:46,050 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 13:39:46,203 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-09-20
+2023-08-16 13:46:02,689 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 13:46:02,826 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-09-22
+2023-08-16 13:49:45,356 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 13:49:45,506 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-10-22
+2023-08-16 13:52:35,472 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 13:52:35,614 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-10-23
+2023-08-16 13:53:34,636 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 13:53:34,785 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-10-27
+2023-08-16 13:58:25,825 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-16 13:58:25,965 * INFO * com.larsson.sushi.service.BookingServiceImpl * newBooking * Customer made a new booking for date:2023-10-30
+2023-08-16 14:13:40,949 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-17 09:33:23,641 * INFO * com.larsson.sushi.controller.CustomerController * getSushis * Customer checking menu
+2023-08-17 09:33:58,110 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-17 09:38:39,156 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer updated booking with id:19
+2023-08-17 09:44:34,644 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer updated booking with id:19
+2023-08-17 09:45:03,140 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
+2023-08-17 10:02:44,612 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer updated booking with id:17
+2023-08-17 10:03:13,800 * INFO * com.larsson.sushi.service.BookingServiceImpl * upDateBooking * Customer tried to updated booking id:19  to an unavailable date:2023-10-23
+2023-08-22 10:07:18,148 * INFO * com.larsson.sushi.security.ConversionHandler * updateRates * Updated conversion rates
