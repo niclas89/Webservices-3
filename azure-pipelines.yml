@@ -6,8 +6,8 @@
 trigger:
 - master
 
-pool:
-  vmImage: myPool
+pool: myPool
+  
 
 steps:
 - task: Maven@3
