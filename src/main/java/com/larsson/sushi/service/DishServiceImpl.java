@@ -1,7 +1,7 @@
 package com.larsson.sushi.service;
 
 import com.larsson.sushi.model.Dish;
-import com.larsson.sushi.repository.DishRepossitory;
+import com.larsson.sushi.repository.DishRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class DishServiceImpl implements DishService{
     private static final Logger DishLogger = Logger.getLogger(Dish.class);
 
     @Autowired
-    private DishRepossitory repository;
+    private DishRepository repository;
 
     @Override
     public List<Dish> getAllDishes() {

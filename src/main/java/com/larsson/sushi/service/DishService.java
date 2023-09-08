@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface DishService {
 
-    public List<Dish> getAllDishes();
+    List<Dish> getAllDishes();
 
-    public Dish addDish(Dish dish);
+   Dish addDish(Dish dish);
 
-    public Boolean deleteDish(Long id);
+    Boolean deleteDish(Long id);
 }

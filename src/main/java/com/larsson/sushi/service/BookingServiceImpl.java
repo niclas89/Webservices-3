@@ -3,18 +3,13 @@ package com.larsson.sushi.service;
 
 import com.larsson.sushi.exceptionHandling.BusinessException;
 import com.larsson.sushi.model.Booking;
-import com.larsson.sushi.repository.BookingRepository;
-
-import com.larsson.sushi.repository.ItemRepossitory;
-import com.larsson.sushi.repository.OrderRepository;
+import com.larsson.sushi.model.Order;
+import com.larsson.sushi.repository.*;
 import org.apache.log4j.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -26,90 +21,123 @@ public class BookingServiceImpl implements BookingService{
     private static final Logger bookingLogger = Logger.getLogger(BookingServiceImpl.class);
 
     @Autowired
-    private BookingRepository repository;
+    private BookingRepository bookingRepository;
 
     @Autowired
     private OrderRepository orderRepository;
 
+
     @Autowired
-    ItemRepossitory itemRepossitory;
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
 
 
     @Override
-    public Boolean newBooking(Booking newBooking) {
-        if(checkAvailability(newBooking)){
-            /*if(newBooking.getOrder().getId() == null){
-                Order order = orderRepository.save(newBooking.getOrder());
-                for(Item item:order.getItems()){
-                    item.setOrder(order);
-                }
-                itemRepossitory.saveAllAndFlush(order.getItems());
+    public Booking newBooking(Booking newBooking) {
 
+        if(checkAvailability(newBooking)){
+            if(newBooking.getCustomer().getId() == null){
+                newBooking.setCustomer(customerRepository.save(newBooking.getCustomer()));
+                newBooking.getOrder().setCustomer(newBooking.getCustomer());
+            }
+            System.out.println(newBooking.getRoom().getId());
+            if(newBooking.getOrder().getId() == null){
+                newBooking.setOrder(orderRepository.save(newBooking.getOrder()));
+
+                System.out.println(newBooking.getNumberOfGuest() );
+                System.out.println(newBooking.getRoom().getMaxGuest());
+
+            }if(newBooking.getNumberOfGuest() <= roomRepository.getReferenceById(newBooking.getRoom().getId()).getMaxGuest()) {
+                bookingLogger.info("Customer made a new booking for date:" + newBooking.getBookingDate());
+                updateTotalPrice(newBooking);
+                return bookingRepository.saveAndFlush(newBooking);
+
+            }else{
+                throw new BusinessException("Room is to small for the ammount of guests",200);
             }
 
-             */
-            repository.save(newBooking);
-            bookingLogger.info("Customer made a new booking for date:" + newBooking.getBookingDate());
-            return true;
+
+
         }
-        return false;
+
+       throw new BusinessException("Date not available",HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Override
+    public Booking getBooking(Long id) {
+        Booking booking = bookingRepository.getReferenceById(id);
+        updateTotalPrice(booking);
+        return  booking;
     }
 
     @Override
     public List<Booking> allBookingsByCustomerId(Long id) {
-        List<Booking> dbBookings = repository.findAllByCustomer_Id(id);
+        List<Booking> dbBookings = bookingRepository.findAllByCustomer_Id(id);
         for(Booking booking:dbBookings){
-            booking.getOrder().updateTotalPrice();
+            updateTotalPrice(booking);
         }
         return  dbBookings;
     }
 
     @Override
     public Booking upDateBooking(Booking updatedBooking) {
-        boolean availabilityCheck;
-        Optional<Booking> dbBooking = repository.findById(updatedBooking.getId());
+        if(updatedBooking.getId() == null){
+            throw new DataIntegrityViolationException("");
+        }
+        Optional<Booking> dbBooking = bookingRepository.findById(updatedBooking.getId());
         if(dbBooking.isPresent()){
-            availabilityCheck = checkDateChange(dbBooking.get(),updatedBooking);
+
             dbBooking.get().updateValues(updatedBooking);
-            if(availabilityCheck){
+
                 if(!checkAvailability(dbBooking.get())){
-                    bookingLogger.info("Customer tried to updated booking id:" + dbBooking.get().getId() + "  to an unavailable date:" + dbBooking.get().getBookingDate());
                     throw new BusinessException("Booking at chosen date and time not available ", HttpStatus.NOT_MODIFIED.value());
-                    //throw new DataIntegrityViolationException("Booking at chosen date and time not available");
                 }
+
+            if(dbBooking.get().getNumberOfGuest() <= roomRepository.getReferenceById(dbBooking.get().getRoom().getId()).getMaxGuest()) {
+                Order dbOrder = orderRepository.getReferenceById(dbBooking.get().getOrder().getId());
+                dbOrder.setItems(dbBooking.get().getOrder().getItems());
+                orderRepository.save(dbOrder);
+                bookingLogger.info("Customer updated booking with id:" + dbBooking.get().getId());
+                return bookingRepository.save(dbBooking.get());
+            }else{
+                throw new BusinessException("Room is to small for the ammount of guests",200);
             }
-            bookingLogger.info("Customer updated booking with id:"+ dbBooking.get().getId());
-            return repository.save(dbBooking.get());
         }else{
             throw new NoSuchElementException("No booking with that booking id");
         }
     }
 
-    private boolean checkDateChange(Booking booking1 , Booking booking2){
-        if(booking1.getBookingDate().equalsIgnoreCase(booking2.getBookingDate()) && booking1.isLunch() && booking2.isLunch() || booking1.getBookingDate().equalsIgnoreCase(booking2.getBookingDate()) && booking1.isDinner() && booking2.isDinner()   ){
-        }else return true;
-
-        if(booking1.getRoom().getId().equals(booking2.getRoom().getId())){
-        }else return true;
-
-        return false;
-    }
 
     public boolean checkAvailability(Booking booking){
         Optional<Booking> occupied;
+
         if(booking.isDinner()) {
-             occupied = repository.findByBookingDateAndRoomAndDinnerIsTrue(booking.getBookingDate(), booking.getRoom());
+             occupied = bookingRepository.findByBookingDateAndRoomAndDinnerIsTrue(booking.getBookingDate(), booking.getRoom());
         } else if (booking.isLunch()) {
-            occupied = repository.findByBookingDateAndRoomAndLunchIsTrue(booking.getBookingDate(),booking.getRoom());
+            occupied = bookingRepository.findByBookingDateAndRoomAndLunchIsTrue(booking.getBookingDate(),booking.getRoom());
 
         }else{
-            throw  new DataIntegrityViolationException("Incomplete  Booking, Dinner och Lunch must be selected  ");
+            throw  new DataIntegrityViolationException("Incomplete  Booking, Dinner or Lunch must be selected  ");
         }
 
-        return occupied.isEmpty();
+        if(occupied.isPresent()){
+            if (occupied.get().getId().equals(booking.getId())){
+                return true;
+            }else
+                return false;
+
+        }
+
+
+        return true;
 
 
 
+    }
+    public void updateTotalPrice(Booking booking){
+        booking.getOrder().updateTotalPrice();
     }
 
 }

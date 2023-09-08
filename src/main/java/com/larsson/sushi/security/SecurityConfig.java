@@ -51,7 +51,7 @@ public class SecurityConfig  {
 
         http.httpBasic();
 
-        http.csrf().disable();
+
 
 
         http

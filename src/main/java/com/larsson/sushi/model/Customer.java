@@ -8,23 +8,23 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
 
-    @Column(name = "name")
+    @Column(name = "name" ,nullable = false)
     private String name;
 
-    @Column(name = "address")
+    @Column(name = "address",nullable = false)
     private String address;
-    @Column(name = "user_name")
+    @Column(name = "user_name",nullable = false)
     private String userName;
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -57,7 +57,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int id, String name, String address, String userName) {
+    public Customer(Long id, String name, String address, String userName) {
         this.id = id;
         this.name = name;
         this.address = address;

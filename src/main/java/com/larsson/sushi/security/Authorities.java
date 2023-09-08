@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 
 
 
-
+// authorities entity used by Spring-security to validate if user has access to resource
 @Entity
 @Table(name = "authorities")
 public class Authorities {

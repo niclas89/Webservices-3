@@ -1,11 +1,15 @@
 package com.larsson.sushi.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import java.text.SimpleDateFormat;
+import org.springframework.dao.DataIntegrityViolationException;
+import java.time.LocalDate;
+
 
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "booking")
 public class Booking {
 
@@ -16,15 +20,20 @@ public class Booking {
     private Long id;
 
     @Column(name = "booking_date")
-    private String bookingDate;
+    private LocalDate bookingDate;
 
-    @ManyToOne
+
+    @Column(name = "number_of_guest")
+    private Short numberOfGuest;
+
+    @ManyToOne( fetch = FetchType.EAGER)
     private Room room;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne( fetch = FetchType.EAGER )
     private Order order;
 
     @Column(name = "lunch")
@@ -34,6 +43,28 @@ public class Booking {
     private boolean dinner;
 
 
+    public Booking() {
+    }
+
+    public Booking(Long id, LocalDate bookingDate, Room room, Short numberOfGuest, Customer customer, Order order, boolean lunch, boolean dinner) {
+        this.id = id;
+        this.bookingDate = bookingDate;
+        this.room = room;
+        this.numberOfGuest = numberOfGuest;
+        this.customer = customer;
+        this.order = order;
+        this.lunch = lunch;
+        this.dinner = dinner;
+    }
+
+    public Short getNumberOfGuest() {
+        return numberOfGuest;
+    }
+
+    public void setNumberOfGuest(Short numberOfGuest) {
+        this.numberOfGuest = numberOfGuest;
+    }
+
     public Long getId() {
         return id;
     }
@@ -42,13 +73,19 @@ public class Booking {
         this.id = id;
     }
 
-    public String getBookingDate() {
+    public LocalDate getBookingDate() {
+
         return bookingDate;
     }
 
-    public void setBookingDate(String newBookingDate) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-        this.bookingDate = newBookingDate;
+    public void setBookingDate(LocalDate newBookingDate) {
+            if(newBookingDate.isAfter(LocalDate.of(2020,9,14)) && !newBookingDate.isAfter(LocalDate.now().plusMonths(3))){
+                this.bookingDate = newBookingDate;
+            }else{
+                throw new DataIntegrityViolationException("Incorrect date ");
+            }
+
+
     }
 
     public Room getRoom() {
@@ -73,6 +110,9 @@ public class Booking {
 
     public void setLunch(boolean lunch) {
         this.lunch = lunch;
+        if(lunch){
+            setDinner(false);
+        }
     }
 
     public boolean isDinner() {
@@ -81,6 +121,9 @@ public class Booking {
 
     public void setDinner(boolean dinner) {
         this.dinner = dinner;
+        if(dinner){
+            setLunch(false);
+        }
     }
 
     public Order getOrder() {
@@ -98,17 +141,21 @@ public class Booking {
         this.room = updatedBooking.getRoom();
         this.customer = updatedBooking.getCustomer();
         this.order = updatedBooking.getOrder();
+
     }
 
-    public Booking() {
-    }
 
-    public Booking(Long id, String bookingDate, Room room, Customer customer,Order order, boolean lunch, boolean dinner) {
-        this.id = id;
-        this.bookingDate = bookingDate;
-        this.room = room;
-        this.customer = customer;
-        this.lunch = lunch;
-        this.dinner = dinner;
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id=" + id +
+                ", bookingDate=" + bookingDate +
+                ", room=" + room +
+                ", customer=" + customer +
+                ", order=" + order +
+                ", lunch=" + lunch +
+                ", dinner=" + dinner +
+                '}';
     }
 }

@@ -16,8 +16,8 @@ public class RoomServiceImpl implements RoomService{
     @Override
     public Room updateRoom(Room room) {
         if(repository.existsById(room.getId())) {
-            return repository.save(room);
+                return repository.save(room);
         }
-        else throw new NoSuchElementException("No room found with id:" + room.getId());
+        else throw new NoSuchElementException();
     }
 }

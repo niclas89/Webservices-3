@@ -1,17 +1,16 @@
 package com.larsson.sushi.service;
 
 import com.larsson.sushi.model.Item;
-import com.larsson.sushi.repository.ItemRepossitory;
+import com.larsson.sushi.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService{
     @Autowired
-    ItemRepossitory repository;
+    ItemRepository repository;
 
 
     @Override

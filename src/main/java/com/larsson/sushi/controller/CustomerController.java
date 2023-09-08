@@ -3,12 +3,14 @@ package com.larsson.sushi.controller;
 
 import com.larsson.sushi.model.*;
 import com.larsson.sushi.service.*;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -19,11 +21,12 @@ public class CustomerController {
     @Autowired
     DishService dishService;
 
-    @Autowired
-    ItemServiceImpl itemService;
 
     @Autowired
     OrderService orderService;
+
+    @Value("${redirectUrl}")
+    private String redirectUrl;
 
 
 
@@ -31,34 +34,34 @@ public class CustomerController {
     BookingServiceImpl bookingService;
 
     @GetMapping("/sushis")
-    public List<Dish> getSushis(){
+    public ResponseEntity<List<Dish>> getSushis(){
         customerLogger.info("Customer checking menu");
-        return dishService.getAllDishes();
+        return ResponseEntity.ok(dishService.getAllDishes());
     }
 
-    @GetMapping("/item/{id}")
-    public Item getItem(@PathVariable Long id){
-        return itemService.getItem(id);
-    }
 
-    @GetMapping("/order/{id}")
-    public Order getOrder(@PathVariable Long id){
-        return orderService.getOrder(id);
-    }
+
 
     @GetMapping("/mybookings/{id}")
-    public List<Booking> getBookings(@PathVariable Long id){
-        return bookingService.allBookingsByCustomerId(id);
+    public ResponseEntity<List<Booking>> getBookings(@PathVariable Long id){
+        return ResponseEntity.ok(bookingService.allBookingsByCustomerId(id));
     }
 
     @PostMapping("/bookroom")
-    public boolean newBooking(@RequestBody Booking booking){
-        return bookingService.newBooking(booking);
+    public void newBooking(@RequestBody Booking booking, HttpServletResponse response) throws IOException {
+        Long id = bookingService.newBooking(booking).getId();
+         response.sendRedirect("http://localhost:8585/api/v3/booking/"+id);
+    }
+
+    @GetMapping("/booking/{id}")
+    public ResponseEntity<Booking> getBooking(@PathVariable Long id){
+        return ResponseEntity.ok(bookingService.getBooking(id));
     }
 
     @PutMapping("/updatebooking")
-    public ResponseEntity<Booking> updateBooking(@RequestBody Booking booking){
-        return new ResponseEntity<>(bookingService.upDateBooking(booking),HttpStatus.OK);
+    public void updateBooking(@RequestBody Booking booking,HttpServletResponse response) throws IOException {
+        Long id = bookingService.upDateBooking(booking).getId();
+        response.sendRedirect("http://localhost:8585/api/v3/booking/"+id);
     }
 
 

@@ -1,16 +1,11 @@
 package com.larsson.sushi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.larsson.sushi.security.ConversionHandler;
+import com.larsson.sushi.conversion.ConversionHandler;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CollectionId;
-
-import java.awt.event.ItemEvent;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,10 +27,11 @@ public class Order {
     @Column(name ="total_price_euro" )
     private BigDecimal totalPriceEuro;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    //@Cascade(org.hibernate.annotations.CascadeType.PERSIST)
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
     @JsonIgnoreProperties("order")
     private List<Item> items;
+
+
 
 
 
@@ -87,20 +83,19 @@ public class Order {
     }
 
     public void updateTotalPrice(){
-        BigDecimal price = new BigDecimal(0);
+        //BigDecimal price = new BigDecimal(0);
         int temp = 0 ;
         for(Item item:items){
            temp += item.getDish().getPrice()*item.getQuantity();
         }
-        price = BigDecimal.valueOf(temp);
-        setTotalPriceSek(price);
+        //price = BigDecimal.valueOf(temp);
+        setTotalPriceSek(BigDecimal.valueOf(temp));
         ConversionHandler handler = ConversionHandler.getInstance();
-        BigDecimal conversion = handler.getRate("SEK");
-        System.out.println("Conversion = " + conversion);
+        //BigDecimal conversion = handler.getRate("SEK");
+        BigDecimal conversion = ConversionHandler.getInstance().getRate("SEK");
         BigDecimal euro = this.totalPriceSek.divide(conversion,MathContext.DECIMAL32);
-        System.out.println("euro = " + euro);
         this.totalPriceEuro = (euro.setScale(0, RoundingMode.UP));
-        System.out.println(price);
+
 
 
     }

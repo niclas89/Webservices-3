@@ -1,7 +1,8 @@
-package com.larsson.sushi.security;
+package com.larsson.sushi.conversion;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.log4j.Logger;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -39,12 +40,16 @@ public class ConversionHandler {
 
     public BigDecimal getRate(String currencyCode){
         LocalTime currentTime = LocalTime.now();
+        if(!conversionRates.containsKey(currencyCode)){
+            conversionRates.add(currencyCode,BigDecimal.ONE);
+        }
         if(lastUpdate == null){
             updateRates();
             return conversionRates.getFirst(currencyCode);
-        }else if(currentTime.toSecondOfDay() > lastUpdate.toSecondOfDay()+900){
-          updateRates();
         }
+        //else if(currentTime.toSecondOfDay() > lastUpdate.toSecondOfDay()+900){
+          //updateRates();
+        //}
 
         if(currentTime.toSecondOfDay() > lastUpdate.toSecondOfDay()+900){
             updateRates();
@@ -74,7 +79,7 @@ public class ConversionHandler {
             for(String symbol: conversionRates.keySet()) {
                 String amount = String.valueOf(response.get("rates").get(symbol));
                 BigDecimal conversion = new BigDecimal(amount);
-                conversionRates.getFirst(symbol).add(conversion);
+                //conversionRates.getFirst(symbol).add(conversion);
                 conversionRates.remove(symbol);
                 conversionRates.add(symbol,conversion);
             }
@@ -83,6 +88,13 @@ public class ConversionHandler {
 
         }else{
             conversionLogger.info("Failed to update rates");
+        }
+
+    }
+
+    public void addCurrency(String currencyCode){
+        if(currencyCode.length() != 3){
+            throw new DataIntegrityViolationException("");
         }
 
     }

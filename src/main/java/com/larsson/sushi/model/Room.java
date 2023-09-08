@@ -10,13 +10,13 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name",nullable = false)
     String name;
 
-    @Column(name = "info")
+    @Column(name = "info",nullable = false)
     private String description;
 
-    @Column(name = "max_guest")
+    @Column(name = "max_guest",nullable = false)
     private int maxGuest;
 
 
