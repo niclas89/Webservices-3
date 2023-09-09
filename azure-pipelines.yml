@@ -22,13 +22,10 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: CopyFiles@2
-  inputs:
-    Contents: 'target/sushi-0.0.1-SNAPSHOT.jar'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: 'target/sushi-0.0.1-SNAPSHOT.jar'
     ArtifactName: 'sushiApi'
     publishLocation: 'Container'
