@@ -43,7 +43,7 @@ public class SecurityConfig  {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/item/{id}", "/order/{id}", "/mybookings/{id}","/sushis", "/newbooking", "/updatebooking").hasRole("USER")
+                .requestMatchers("/item/{id}", "/order/{id}", "/mybookings/{id}","/sushis", "/bookroom", "/updatebooking").hasRole("USER")
                 .requestMatchers("/customers", "/add-dish", "/deletedish", "/updateroom").hasRole("ADMIN")
                         .anyRequest()
                                 .authenticated();
