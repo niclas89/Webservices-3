@@ -67,8 +67,12 @@ public class BookingServiceImpl implements BookingService{
 
     @Override
     public Booking getBooking(Long id) {
-        Booking booking = bookingRepository.getReferenceById(id);
-        updateTotalPrice(booking);
+        Booking booking;
+        if(bookingRepository.existsById(id)) {
+             booking = bookingRepository.getReferenceById(id);
+            updateTotalPrice(booking);
+        }else throw new NoSuchElementException("");
+
         return  booking;
     }
 
