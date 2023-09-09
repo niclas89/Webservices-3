@@ -50,7 +50,7 @@ public class CustomerController {
     @PostMapping("/bookroom")
     public void newBooking(@RequestBody Booking booking, HttpServletResponse response) throws IOException {
         Long id = bookingService.newBooking(booking).getId();
-         response.sendRedirect("http://localhost:8585/api/v3/booking/"+id);
+         response.sendRedirect(redirectUrl+id);
     }
 
     @GetMapping("/booking/{id}")
@@ -61,7 +61,7 @@ public class CustomerController {
     @PutMapping("/updatebooking")
     public void updateBooking(@RequestBody Booking booking,HttpServletResponse response) throws IOException {
         Long id = bookingService.upDateBooking(booking).getId();
-        response.sendRedirect("http://localhost:8585/api/v3/booking/"+id);
+        response.sendRedirect(redirectUrl+id);
     }
 
 
