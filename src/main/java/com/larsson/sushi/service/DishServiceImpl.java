@@ -1,7 +1,10 @@
 package com.larsson.sushi.service;
 
+import com.larsson.sushi.exceptionHandling.BusinessException;
 import com.larsson.sushi.model.Dish;
+import com.larsson.sushi.model.Item;
 import com.larsson.sushi.repository.DishRepository;
+import com.larsson.sushi.repository.ItemRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,9 @@ public class DishServiceImpl implements DishService{
 
     @Autowired
     private DishRepository repository;
+
+    @Autowired
+    private ItemRepository itemRepository;
 
     @Override
     public List<Dish> getAllDishes() {
@@ -32,9 +38,11 @@ public class DishServiceImpl implements DishService{
     public Boolean deleteDish(Long id) {
 
         if(repository.existsById(id)){
-            repository.deleteById(id);
-            DishLogger.info("Admin deleted dish, id:" + id);
-            return true;
+            if(!itemRepository.existsByDish_Id(id)) {
+                repository.deleteById(id);
+                DishLogger.info("Admin deleted dish, id:" + id);
+                return true;
+            }else throw new BusinessException("must delete orders containing dish",200);
         }else
             throw  new NoSuchElementException("No dish found with id:" + id);
 

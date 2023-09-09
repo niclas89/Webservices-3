@@ -12,7 +12,7 @@ public class Item {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     private Dish dish;
 
 
